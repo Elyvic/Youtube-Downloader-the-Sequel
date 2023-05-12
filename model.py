@@ -16,7 +16,8 @@ class Model:
         self.folderName = filedialog.askdirectory()
 
     def Mp3Logic(self, url):
-        yt = YouTube(url)
+        #added the authentication stuff for the download to work
+        yt = YouTube(url, use_oauth = True, allow_oauth_cache = True)
         video = yt.streams.filter(only_audio=True).first()
         fileName = video.download(output_path = self.folderName)
 
@@ -39,7 +40,8 @@ class Model:
         print("done")
 
     def Mp4Logic(self, url):
-        yt = YouTube(url)
+        # added the authentication stuff for the download to work
+        yt = YouTube(url, use_oauth = True, allow_oauth_cache = True)
         video = yt.streams.get_highest_resolution()
         video.download(output_path = self.folderName)
 

@@ -8,7 +8,6 @@ class Controller(tk.Tk):
         self.model = Model()
         self.view = View(self)
 
-
     def first(self):
 
         self.view.GUI()
@@ -31,4 +30,4 @@ class Controller(tk.Tk):
 
     def SaveFolder(self):
         self.model.SaveFolderLogic()
-        print("Victor: nah fool take that off")
+        print(self.model.folderName)

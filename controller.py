@@ -27,17 +27,14 @@ class Controller(tk.Tk):
 
 
     def download(self):
-        pass
         urlString = self.view.urlEntry.get()
-        # check the dropdown
+
         if self.view.menu.get() == "mp3":
             self.model.Mp3Logic(urlString)
             self.view.modifyURLEntry()
         elif self.view.menu.get() == "mp4":
             self.model.Mp4Logic(urlString)
             self.view.modifyURLEntry()
-        # decide if mp3 or mp4
-        # download
 
     def OpenFolder(self):
         self.model.OpenFolderLogic()

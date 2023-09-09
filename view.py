@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import filedialog
 
 class View(tk.Tk):
     def __init__(self, controller):
@@ -23,7 +24,7 @@ class View(tk.Tk):
         self.urlLabel = tk.Label(self, text="URL:")
         self.urlEntry = tk.Entry(self, textvariable = "", width=50)
 
-        self.folderEntry = tk.Entry(self, textvariable = '', width=40, justify = "center")
+        self.folderEntry = tk.Entry(self, textvariable = '', width=40, justify = "center", state = "disabled")
 
 
     def Buttons(self):
@@ -57,6 +58,18 @@ class View(tk.Tk):
     def modifyURLEntry(self):
         self.urlEntry.delete(0, tk.END)
         self.urlEntry.insert(0, "")
+
+    def modifyFolderEntry(self, folderName):
+        self.folderEntry.config(state = "normal")
+        self.folderEntry.delete(0, tk.END)
+        self.folderEntry.insert(0, folderName)
+        self.folderEntry.config(state = "disabled")
+
+    #figure the logic for this later
+    def modifySaveFolder(self, folderName):
+        folderName = filedialog.askdirectory()
+
+        return folderName
 
     def GUI(self):
         print("victor sucks")

@@ -9,8 +9,7 @@ class Controller(tk.Tk):
         self.model = Model()
         self.view = View(self)
 
-    def first(self):
-
+    def startHere(self):
         self.view.GUI()
 
     #will be removed/modified
@@ -41,8 +40,9 @@ class Controller(tk.Tk):
 
     def SaveFolder(self):
         self.model.SaveFolderLogic()
-        self.view.folderEntry.delete(0, tk.END)
-        self.view.folderEntry.insert(0, self.model.folderName)
+        self.view.modifyFolderEntry(self.model.folderName)
+        #self.view.folderEntry.delete(0, tk.END)
+        #self.view.folderEntry.insert(0, self.model.folderName)
         print(self.model.folderName)
 
     def PasteLink(self):

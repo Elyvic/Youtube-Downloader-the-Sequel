@@ -1,5 +1,7 @@
 import tkinter as tk
 from tkinter import filedialog
+import pyperclip as py
+
 
 class View(tk.Tk):
     def __init__(self, controller):
@@ -70,6 +72,9 @@ class View(tk.Tk):
         folderName = filedialog.askdirectory()
 
         return folderName
+
+    def pasteURLEntry(self):
+        self.urlEntry.insert(0, py.paste())
 
     def GUI(self):
         print("victor sucks")

@@ -1,9 +1,9 @@
 from model import Model
 from view import View
-import tkinter as tk
-import pyperclip as py
+#import tkinter as tk
 
-class Controller(tk.Tk):
+#put tk.TK in parenthesis after "class Controller" if using tkinter in controller again
+class Controller:
     #constructor
     def __init__(self):
         self.model = Model()
@@ -46,5 +46,6 @@ class Controller(tk.Tk):
         print(self.model.folderName)
 
     def PasteLink(self):
-        #using a 3rd party module pyperclip to do the pasting function
-        self.view.urlEntry.insert(0, py.paste())
+        #using a 3rd party module pyperclip to do the pasting functionality
+        #self.view.urlEntry.insert(0, py.paste())
+        self.view.pasteURLEntry()

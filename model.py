@@ -1,7 +1,6 @@
 import os
 import subprocess
 from tkinter import filedialog
-#from pytube import YouTube
 from pytubefix import YouTube
 from pytubefix.cli import on_progress
 
@@ -59,8 +58,16 @@ class Model:
 
 
         # added the authentication stuff for the download to work
-        yt = YouTube(url, use_oauth = True, allow_oauth_cache = True)
+        yt = YouTube(url, use_oauth = True, allow_oauth_cache = True, on_progress_callback = on_progress)
         video = yt.streams.get_highest_resolution()
         video.download(output_path = self.folderName)
 
         print("done")
+
+    #download audio without conversion to mp3
+    def justAudio(self, url):
+        yt = YouTube(url, use_oauth = True, allow_oauth_cache = True, on_progress_callback = on_progress)
+        video = yt.streams.filter(only_audio=True).first()
+        fileName = video.download(output_path=self.folderName)
+
+        source = fileName

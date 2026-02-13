@@ -43,7 +43,7 @@ class View(tk.Tk):
         self.menu = tk.StringVar()
         self.menu.set("mp3")
 
-        self.drop = tk.OptionMenu(self, self.menu, "mp3", "mp4", "audio")
+        self.drop = tk.OptionMenu(self, self.menu, "mp3", "mp4")
 
     def Placements(self):
         self.urlLabel.place(x=30, y=30)

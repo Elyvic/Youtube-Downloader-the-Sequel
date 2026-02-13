@@ -34,9 +34,6 @@ class Controller:
         elif self.view.menu.get() == "mp4":
             self.model.Mp4Logic(urlString)
             self.view.modifyURLEntry()
-        elif self.view.menu.get() == "audio":
-            self.model.justAudio(urlString)
-            self.view.modifyURLEntry()
 
     def OpenFolder(self):
         self.model.OpenFolderLogic()

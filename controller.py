@@ -12,37 +12,27 @@ class Controller:
     def startHere(self):
         self.view.GUI()
 
-    #will be removed/modified
-    #def Mp3Control(self):
-    #    urlString = self.view.urlEntry.get()
-    #    self.model.Mp3Logic(urlString)
-    #    self.view.modifyURLEntry()
-
-    #will be removed/modified
-    #def Mp4Control(self):
-    #    urlString = self.view.urlEntry.get()
-    #    self.model.Mp4Logic(urlString)
-    #    self.view.modifyURLEntry()
-
-
     def download(self):
         urlString = self.view.urlEntry.get()
 
-        if self.view.menu.get() == "mp3":
-            self.model.Mp3Logic(urlString)
+        if self.view.menu.get() == "Legacy":       #convert using powershell. no special characters allowed
+            self.model.Mp3PowershellLogic(urlString)
             self.view.modifyURLEntry()
         elif self.view.menu.get() == "mp4":
             self.model.Mp4Logic(urlString)
+            self.view.modifyURLEntry()
+        elif self.view.menu.get() == "mp3":
+            self.model.mp3MoviePyLogic(urlString)  #convert using moviepy module. can use special characters
             self.view.modifyURLEntry()
 
     def OpenFolder(self):
         self.model.OpenFolderLogic()
 
     def SaveFolder(self):
-        self.model.SaveFolderLogic()
+        folderName = self.view.modifySaveFolder()
+
+        self.model.SaveFolderLogic(folderName)
         self.view.modifyFolderEntry(self.model.folderName)
-        #self.view.folderEntry.delete(0, tk.END)
-        #self.view.folderEntry.insert(0, self.model.folderName)
         print(self.model.folderName)
 
     def PasteLink(self):

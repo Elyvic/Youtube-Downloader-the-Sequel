@@ -30,7 +30,7 @@ class View(tk.Tk):
 
 
     def Buttons(self):
-        #note to self: don't put parenthesis on the command section of the button or they'll run automatically
+        #note to self: don't put parenthesis on the command section of the button otherwise they'll run automatically
 
         #self.mp3Button = tk.Button(self, text="Mp3", command=self.controller.Mp3Control) #will be removed in the future
         #self.mp4Button = tk.Button(self, text="Mp4", command=self.controller.Mp4Control) #will bbe removed in the future
@@ -43,19 +43,19 @@ class View(tk.Tk):
         self.menu = tk.StringVar()
         self.menu.set("mp3")
 
-        self.drop = tk.OptionMenu(self, self.menu, "mp3", "mp4")
+        self.drop = tk.OptionMenu(self, self.menu, "mp3", "mp4", "Legacy" )
 
     def Placements(self):
-        self.urlLabel.place(x=30, y=30)
-        self.urlEntry.place(x=60, y=30)
-        self.folderEntry.place(x=85, y=55)
+        self.urlLabel.place(x = 30, y = 30)
+        self.urlEntry.place(x = 60, y = 30)
+        self.folderEntry.place(x = 85, y = 55)
         #self.mp3Button.place(x=0, y=95) #remove later
         #self.mp4Button.place(x=40, y=95) #remove later
-        self.folderButton.place(x=220, y=82)
-        self.fileButton.place(x=366, y=55)
-        self.pasteButton.place(x =366 , y = 28)
-        self.downloadButton.place(x=145, y = 115)
-        self.drop.place(x = 150, y =80 )
+        self.folderButton.place(x = 220, y = 82)
+        self.fileButton.place(x = 366, y = 55)
+        self.pasteButton.place(x = 366 , y = 28)
+        self.downloadButton.place(x = 145, y = 115)
+        self.drop.place(x = 150, y = 80 )
 
     def modifyURLEntry(self):
         self.urlEntry.delete(0, tk.END)
@@ -68,7 +68,7 @@ class View(tk.Tk):
         self.folderEntry.config(state = "disabled")
 
     #figure the logic for this later
-    def modifySaveFolder(self, folderName):
+    def modifySaveFolder(self):
         folderName = filedialog.askdirectory()
 
         return folderName

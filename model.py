@@ -1,9 +1,9 @@
 import os
 import subprocess
 import time
-from tkinter import filedialog
 from pytubefix import YouTube
 from pytubefix.cli import on_progress
+from moviepy import VideoFileClip
 
 #pytube doesn't seem to work now. pytubefix temp fix. might need change to different module in the future
 class Model:
@@ -15,12 +15,12 @@ class Model:
         path = os.path.realpath(path)
         os.startfile(path)
 
-    def SaveFolderLogic(self):
-        self.folderName = filedialog.askdirectory()
+    def SaveFolderLogic(self, folder):
+        self.folderName = folder
 
 
-
-    def Mp3Logic(self, url):
+    #uses powershell to convert to mp3. legacy conversion. will not be removed in case moviepy stops working
+    def Mp3PowershellLogic(self, url):
         # test with the link below:
         #             https://www.youtube.com/watch?v=hW4Hi_zG79M          -       as we fade away
         #             https://www.youtube.com/watch?v=3eq-qUy-a-A          -       apex of the world
@@ -31,7 +31,7 @@ class Model:
         yt = YouTube(url, use_oauth = True, allow_oauth_cache = True, on_progress_callback = on_progress)
         video = yt.streams.filter(only_audio=True).first()
 
-        time.sleep(2) #adding this removed the 403 forbibben error
+        time.sleep(2) #adding this removed the 403 forbidden error
 
         fileName = video.download(output_path = self.folderName)
 
@@ -71,3 +71,17 @@ class Model:
 
         print("done")
 
+    #uses moviepy module to convert to mp3.
+    def mp3MoviePyLogic(self, url):
+        yt = YouTube(url, use_oauth=True, allow_oauth_cache=True, on_progress_callback=on_progress)
+        video = yt.streams.get_highest_resolution()
+
+        time.sleep(2)
+
+        fileName = video.download(output_path=self.folderName)
+
+        mp3FileName = VideoFileClip(fileName)
+        mp3FileName.audio.write_audiofile(fileName[:-4] + ".mp3")
+        mp3FileName.close()
+
+        os.remove(fileName)
